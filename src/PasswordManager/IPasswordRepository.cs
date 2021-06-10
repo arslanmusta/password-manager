@@ -5,6 +5,6 @@ namespace PasswordManager
 {
     public interface IPasswordRepository
     {
-        public ICollection<Password> Passwords { get; set; }
+        ICollection<Password> GetAll();
     }
 }
