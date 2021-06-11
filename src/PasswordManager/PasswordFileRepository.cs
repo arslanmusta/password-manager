@@ -11,7 +11,7 @@ namespace PasswordManager
     public class PasswordFileRepository : IPasswordRepository
     {
         private readonly string _fileName;
-        private ICollection<Password> _passwords;
+        private readonly ICollection<Password> _passwords;
         private readonly IEncryptor _encryptor;
         private readonly string _masterPassword;
 
@@ -20,20 +20,18 @@ namespace PasswordManager
             _fileName = fileName;
             _encryptor = encryptor;
             _masterPassword = masterPassword;
+            
+            using var stream = new FileStream(_fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            using var readerStream = new StreamReader(stream, Encoding.UTF8);
+            var encryptedJson = readerStream.ReadToEnd();
+                
+            var json = _encryptor.Decrypt(encryptedJson, _masterPassword);
+            _passwords = string.IsNullOrEmpty(json) ? new List<Password>() : JsonSerializer.Deserialize<ICollection<Password>>(json);
+            
         }
 
         public ICollection<Password> GetAll()
         {
-            if (_passwords == null)
-            {
-                using var stream = new FileStream(_fileName, FileMode.OpenOrCreate, FileAccess.Read);
-                using var readerStream = new StreamReader(stream, Encoding.UTF8);
-                var encryptedJson = readerStream.ReadToEnd();
-                
-                var json = _encryptor.Decrypt(encryptedJson, _masterPassword);
-                _passwords = JsonSerializer.Deserialize<ICollection<Password>>(json);
-            }
-            
             return _passwords;
         }
 
