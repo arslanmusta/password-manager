@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
@@ -37,7 +38,16 @@ namespace PasswordManager
 
         public void Add(Password password)
         {
-            _passwords.Add(password);
+            var existPassword = _passwords.FirstOrDefault(p => p.Domain == password.Domain);
+
+            if (existPassword != null)
+            {
+                existPassword.HashedPassword = password.HashedPassword;
+            }
+            else
+            {
+                _passwords.Add(password);
+            }
             
             Commit();
         }
