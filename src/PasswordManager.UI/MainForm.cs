@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PasswordManager.Data;
 
 namespace PasswordManager.UI
 {
@@ -45,7 +46,33 @@ namespace PasswordManager.UI
 
         private void LoadButton_Click(object sender, EventArgs e)
         {
-            
+            try
+            {
+                var fileRepository = new PasswordFileRepository(openFileDialog.FileName, new AesEncryptor(), MasterPasswordTextBox.Text);
+                var passwords = fileRepository.GetAll();
+                PasswordDataGridView.DataSource = passwords;
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
+        }
+
+        private void MasterPasswordTextBox_KeyPress(object? sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                if (e.KeyChar == (int)Keys.Enter)
+                {
+                    var fileRepository = new PasswordFileRepository(openFileDialog.FileName, new AesEncryptor(), MasterPasswordTextBox.Text);
+                    var passwords = fileRepository.GetAll();
+                    PasswordDataGridView.DataSource = passwords;
+                }
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
         }
     }
 }
