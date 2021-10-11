@@ -1,4 +1,4 @@
-﻿namespace PasswordManager
+﻿namespace PasswordManager.Data
 {
     public interface IEncryptor
     {

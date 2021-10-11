@@ -1,4 +1,6 @@
-﻿namespace PasswordManager.Commands
+﻿using PasswordManager.Data;
+
+namespace PasswordManager.Commands
 {
     public class InsertCommand : IFileCommand, IMasterPasswordCommand, IPasswordCommand, IDomainCommand
     {

@@ -1,4 +1,5 @@
 ﻿using System;
+using PasswordManager.Data;
 
 namespace PasswordManager.Commands
 {
