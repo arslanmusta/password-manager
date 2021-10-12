@@ -41,9 +41,7 @@ namespace PasswordManager.UI
             this.LoadButton = new System.Windows.Forms.Button();
             this.PasswordDataGridView = new System.Windows.Forms.DataGridView();
             this.Domain = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Password = new DataGridViewPasswordColumn();
-            this.Copy = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Copy.Text = "Copy";
+            this.Password = new PasswordManager.UI.Controls.DataGridViewPasswordColumn();
             ((System.ComponentModel.ISupportInitialize)(this.PasswordDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -91,7 +89,7 @@ namespace PasswordManager.UI
             this.MasterPasswordTextBox.TabIndex = 4;
             this.MasterPasswordTextBox.UseSystemPasswordChar = true;
             this.MasterPasswordTextBox.TextChanged += new System.EventHandler(this.MasterPasswordTextBox_TextChanged);
-            this.MasterPasswordTextBox.KeyPress += new KeyPressEventHandler(this.MasterPasswordTextBox_KeyPress);
+            this.MasterPasswordTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MasterPasswordTextBox_KeyPress);
             // 
             // LoadButton
             // 
@@ -109,13 +107,13 @@ namespace PasswordManager.UI
             this.PasswordDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.PasswordDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Domain,
-            this.Password,
-            this.Copy});
+            this.Password});
             this.PasswordDataGridView.Location = new System.Drawing.Point(13, 106);
             this.PasswordDataGridView.Name = "PasswordDataGridView";
             this.PasswordDataGridView.RowTemplate.Height = 25;
             this.PasswordDataGridView.Size = new System.Drawing.Size(516, 150);
             this.PasswordDataGridView.TabIndex = 6;
+            this.PasswordDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.PasswordDataGridView_CellDoubleClick);
             // 
             // Domain
             // 
@@ -123,19 +121,15 @@ namespace PasswordManager.UI
             this.Domain.HeaderText = "Domain";
             this.Domain.Name = "Domain";
             this.Domain.ReadOnly = true;
+            this.Domain.Width = 236;
             // 
             // Password
             // 
             this.Password.DataPropertyName = "HashedPassword";
             this.Password.HeaderText = "Password";
             this.Password.Name = "Password";
-            // 
-            // Copy
-            // 
-            this.Copy.HeaderText = "Copy";
-            this.Copy.Name = "Copy";
-            this.Copy.Text = "Copy";
-            this.Copy.ToolTipText = "Copy";
+            this.Password.ReadOnly = true;
+            this.Password.Width = 236;
             // 
             // MainForm
             // 
@@ -168,8 +162,7 @@ namespace PasswordManager.UI
         private System.Windows.Forms.TextBox MasterPasswordTextBox;
         private System.Windows.Forms.Button LoadButton;
         private System.Windows.Forms.DataGridView PasswordDataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Domain;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Password;
-        private System.Windows.Forms.DataGridViewButtonColumn Copy;
+        private DataGridViewTextBoxColumn Domain;
+        private DataGridViewPasswordColumn Password;
     }
 }

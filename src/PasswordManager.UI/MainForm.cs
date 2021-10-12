@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PasswordManager.Data;
+using PasswordManager.UI.Controls;
 
 namespace PasswordManager.UI
 {
@@ -72,6 +73,15 @@ namespace PasswordManager.UI
             catch (Exception exception)
             {
                 Console.WriteLine(exception);
+            }
+        }
+
+        private void PasswordDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var column = PasswordDataGridView.Columns[e.ColumnIndex];
+            if (column is DataGridViewPasswordColumn && e.RowIndex >= 0 && PasswordDataGridView.CurrentCell.Value is string value)
+            {
+                Clipboard.SetText(value);
             }
         }
     }
