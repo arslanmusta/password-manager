@@ -42,6 +42,7 @@ namespace PasswordManager.UI
             this.PasswordDataGridView = new System.Windows.Forms.DataGridView();
             this.Domain = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Password = new PasswordManager.UI.Controls.DataGridViewPasswordColumn();
+            this.AddPasswordButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PasswordDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -111,7 +112,7 @@ namespace PasswordManager.UI
             this.PasswordDataGridView.Location = new System.Drawing.Point(13, 106);
             this.PasswordDataGridView.Name = "PasswordDataGridView";
             this.PasswordDataGridView.RowTemplate.Height = 25;
-            this.PasswordDataGridView.Size = new System.Drawing.Size(516, 150);
+            this.PasswordDataGridView.Size = new System.Drawing.Size(516, 302);
             this.PasswordDataGridView.TabIndex = 6;
             this.PasswordDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.PasswordDataGridView_CellDoubleClick);
             // 
@@ -131,11 +132,21 @@ namespace PasswordManager.UI
             this.Password.ReadOnly = true;
             this.Password.Width = 236;
             // 
+            // AddPasswordButton
+            // 
+            this.AddPasswordButton.Location = new System.Drawing.Point(13, 415);
+            this.AddPasswordButton.Name = "AddPasswordButton";
+            this.AddPasswordButton.Size = new System.Drawing.Size(75, 23);
+            this.AddPasswordButton.TabIndex = 7;
+            this.AddPasswordButton.Text = "Add";
+            this.AddPasswordButton.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(542, 450);
+            this.Controls.Add(this.AddPasswordButton);
             this.Controls.Add(this.PasswordDataGridView);
             this.Controls.Add(this.LoadButton);
             this.Controls.Add(this.MasterPasswordTextBox);
@@ -164,5 +175,6 @@ namespace PasswordManager.UI
         private System.Windows.Forms.DataGridView PasswordDataGridView;
         private DataGridViewTextBoxColumn Domain;
         private DataGridViewPasswordColumn Password;
+        private Button AddPasswordButton;
     }
 }
