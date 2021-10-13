@@ -22,6 +22,7 @@ namespace PasswordManager.UI
 
             _fileNameChanged += _ => LoadButton.Enabled = !string.IsNullOrEmpty(MasterPasswordTextBox.Text);
             _fileNameChanged += fileName => FileTextBox.Text = fileName;
+            _fileNameChanged += _ => AddPasswordButton.Enabled = !string.IsNullOrEmpty(MasterPasswordTextBox.Text);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -47,11 +48,17 @@ namespace PasswordManager.UI
 
         private void LoadButton_Click(object sender, EventArgs e)
         {
+            LoadFile();
+        }
+
+        private void LoadFile()
+        {
             try
             {
                 var fileRepository = new PasswordFileRepository(openFileDialog.FileName, new AesEncryptor(), MasterPasswordTextBox.Text);
                 var passwords = fileRepository.GetAll();
                 PasswordDataGridView.DataSource = passwords;
+                SetLoad(true);
             }
             catch (Exception exception)
             {
@@ -59,20 +66,19 @@ namespace PasswordManager.UI
             }
         }
 
+        private void SetLoad(bool isLoad)
+        {
+            FileSelectButton.Enabled = !isLoad;
+            LoadButton.Enabled = !isLoad;
+            AddPasswordButton.Enabled = isLoad;
+            MasterPasswordTextBox.Enabled = !isLoad;
+        }
+
         private void MasterPasswordTextBox_KeyPress(object? sender, KeyPressEventArgs e)
         {
-            try
+            if (e.KeyChar == (int)Keys.Enter)
             {
-                if (e.KeyChar == (int)Keys.Enter)
-                {
-                    var fileRepository = new PasswordFileRepository(openFileDialog.FileName, new AesEncryptor(), MasterPasswordTextBox.Text);
-                    var passwords = fileRepository.GetAll();
-                    PasswordDataGridView.DataSource = passwords;
-                }
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception);
+                LoadFile();
             }
         }
 
@@ -83,6 +89,14 @@ namespace PasswordManager.UI
             {
                 Clipboard.SetText(value);
             }
+        }
+
+        private void AddPasswordButton_Click(object sender, EventArgs e)
+        {
+            var addPasswordForm = new AddPasswordForm(openFileDialog.FileName, MasterPasswordTextBox.Text);
+            addPasswordForm.StartPosition = FormStartPosition.CenterParent;
+            addPasswordForm.Closed += (_, _) => LoadFile();
+            addPasswordForm.ShowDialog();
         }
     }
 }

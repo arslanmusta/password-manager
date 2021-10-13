@@ -134,12 +134,14 @@ namespace PasswordManager.UI
             // 
             // AddPasswordButton
             // 
+            this.AddPasswordButton.Enabled = false;
             this.AddPasswordButton.Location = new System.Drawing.Point(13, 415);
             this.AddPasswordButton.Name = "AddPasswordButton";
             this.AddPasswordButton.Size = new System.Drawing.Size(75, 23);
             this.AddPasswordButton.TabIndex = 7;
             this.AddPasswordButton.Text = "Add";
             this.AddPasswordButton.UseVisualStyleBackColor = true;
+            this.AddPasswordButton.Click += new System.EventHandler(this.AddPasswordButton_Click);
             // 
             // MainForm
             // 
@@ -155,6 +157,7 @@ namespace PasswordManager.UI
             this.Controls.Add(this.FileTextBox);
             this.Controls.Add(this.FileLabel);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Password Manager";
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PasswordDataGridView)).EndInit();

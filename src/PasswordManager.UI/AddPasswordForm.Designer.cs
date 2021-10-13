@@ -34,6 +34,8 @@ namespace PasswordManager.UI
             this.PasswordLabel = new System.Windows.Forms.Label();
             this.PasswordTextBox = new System.Windows.Forms.TextBox();
             this.ConfirmButton = new System.Windows.Forms.Button();
+            this.ConfirmPasswordTextBox = new System.Windows.Forms.TextBox();
+            this.ConfirmPasswordLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // DomainLabel
@@ -47,10 +49,11 @@ namespace PasswordManager.UI
             // 
             // DomainTextBox
             // 
-            this.DomainTextBox.Location = new System.Drawing.Point(78, 12);
+            this.DomainTextBox.Location = new System.Drawing.Point(125, 12);
             this.DomainTextBox.Name = "DomainTextBox";
-            this.DomainTextBox.Size = new System.Drawing.Size(226, 23);
+            this.DomainTextBox.Size = new System.Drawing.Size(179, 23);
             this.DomainTextBox.TabIndex = 1;
+            this.DomainTextBox.TextChanged += new System.EventHandler(this.AnyTextBox_Change);
             // 
             // PasswordLabel
             // 
@@ -63,25 +66,51 @@ namespace PasswordManager.UI
             // 
             // PasswordTextBox
             // 
-            this.PasswordTextBox.Location = new System.Drawing.Point(78, 52);
+            this.PasswordTextBox.Location = new System.Drawing.Point(125, 52);
             this.PasswordTextBox.Name = "PasswordTextBox";
-            this.PasswordTextBox.Size = new System.Drawing.Size(226, 23);
+            this.PasswordTextBox.Size = new System.Drawing.Size(179, 23);
             this.PasswordTextBox.TabIndex = 3;
+            this.PasswordTextBox.UseSystemPasswordChar = true;
+            this.PasswordTextBox.TextChanged += new System.EventHandler(this.AnyTextBox_Change);
+            this.PasswordTextBox.VisibleChanged += new System.EventHandler(this.AnyTextBox_Change);
             // 
             // ConfirmButton
             // 
-            this.ConfirmButton.Location = new System.Drawing.Point(13, 96);
+            this.ConfirmButton.Enabled = false;
+            this.ConfirmButton.Location = new System.Drawing.Point(12, 136);
             this.ConfirmButton.Name = "ConfirmButton";
             this.ConfirmButton.Size = new System.Drawing.Size(75, 23);
             this.ConfirmButton.TabIndex = 4;
             this.ConfirmButton.Text = "Confirm";
             this.ConfirmButton.UseVisualStyleBackColor = true;
+            this.ConfirmButton.Click += new System.EventHandler(this.ConfirmButton_Click);
+            // 
+            // ConfirmPasswordTextBox
+            // 
+            this.ConfirmPasswordTextBox.Location = new System.Drawing.Point(125, 92);
+            this.ConfirmPasswordTextBox.Name = "ConfirmPasswordTextBox";
+            this.ConfirmPasswordTextBox.Size = new System.Drawing.Size(179, 23);
+            this.ConfirmPasswordTextBox.TabIndex = 6;
+            this.ConfirmPasswordTextBox.UseSystemPasswordChar = true;
+            this.ConfirmPasswordTextBox.TextChanged += new System.EventHandler(this.AnyTextBox_Change);
+            this.ConfirmPasswordTextBox.VisibleChanged += new System.EventHandler(this.AnyTextBox_Change);
+            // 
+            // ConfirmPasswordLabel
+            // 
+            this.ConfirmPasswordLabel.AutoSize = true;
+            this.ConfirmPasswordLabel.Location = new System.Drawing.Point(12, 95);
+            this.ConfirmPasswordLabel.Name = "ConfirmPasswordLabel";
+            this.ConfirmPasswordLabel.Size = new System.Drawing.Size(107, 15);
+            this.ConfirmPasswordLabel.TabIndex = 5;
+            this.ConfirmPasswordLabel.Text = "Confirm Password:";
             // 
             // AddPasswordForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(327, 131);
+            this.ClientSize = new System.Drawing.Size(327, 173);
+            this.Controls.Add(this.ConfirmPasswordTextBox);
+            this.Controls.Add(this.ConfirmPasswordLabel);
             this.Controls.Add(this.ConfirmButton);
             this.Controls.Add(this.PasswordTextBox);
             this.Controls.Add(this.PasswordLabel);
@@ -101,5 +130,7 @@ namespace PasswordManager.UI
         private System.Windows.Forms.Label PasswordLabel;
         private System.Windows.Forms.TextBox PasswordTextBox;
         private System.Windows.Forms.Button ConfirmButton;
+        private System.Windows.Forms.TextBox ConfirmPasswordTextBox;
+        private System.Windows.Forms.Label ConfirmPasswordLabel;
     }
 }
