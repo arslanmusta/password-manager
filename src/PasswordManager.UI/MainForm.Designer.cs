@@ -135,7 +135,7 @@ namespace PasswordManager.UI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(542, 450);
             this.Controls.Add(this.PasswordDataGridView);
             this.Controls.Add(this.LoadButton);
             this.Controls.Add(this.MasterPasswordTextBox);
