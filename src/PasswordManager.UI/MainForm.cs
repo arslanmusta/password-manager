@@ -70,8 +70,10 @@ namespace PasswordManager.UI
         {
             FileSelectButton.Enabled = !isLoad;
             LoadButton.Enabled = !isLoad;
-            AddPasswordButton.Enabled = isLoad;
             MasterPasswordTextBox.Enabled = !isLoad;
+
+            AddPasswordButton.Enabled = isLoad;
+            RemovePasswordButton.Enabled = isLoad;
         }
 
         private void MasterPasswordTextBox_KeyPress(object? sender, KeyPressEventArgs e)
@@ -97,6 +99,25 @@ namespace PasswordManager.UI
             addPasswordForm.StartPosition = FormStartPosition.CenterParent;
             addPasswordForm.Closed += (_, _) => LoadFile();
             addPasswordForm.ShowDialog();
+        }
+
+        private void RemovePasswordButton_Click(object sender, EventArgs e)
+        {
+            var confirmResult = MessageBox.Show("Are you sure you want to remove the selected passwords?", "Confirmation",
+                MessageBoxButtons.YesNo);
+
+            if (confirmResult == DialogResult.Yes)
+            {
+                var fileRepository = new PasswordFileRepository(openFileDialog.FileName, new AesEncryptor(), MasterPasswordTextBox.Text);
+
+                foreach (DataGridViewRow selectedRow in PasswordDataGridView.SelectedRows)
+                {
+                    var password = selectedRow.DataBoundItem as Password;
+                    fileRepository.Remove(password?.Domain);
+                }
+
+                LoadFile();
+            }
         }
     }
 }

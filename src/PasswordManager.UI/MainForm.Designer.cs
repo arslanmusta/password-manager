@@ -43,6 +43,7 @@ namespace PasswordManager.UI
             this.Domain = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Password = new PasswordManager.UI.Controls.DataGridViewPasswordColumn();
             this.AddPasswordButton = new System.Windows.Forms.Button();
+            this.RemovePasswordButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PasswordDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -143,11 +144,23 @@ namespace PasswordManager.UI
             this.AddPasswordButton.UseVisualStyleBackColor = true;
             this.AddPasswordButton.Click += new System.EventHandler(this.AddPasswordButton_Click);
             // 
+            // RemovePasswordButton
+            // 
+            this.RemovePasswordButton.Enabled = false;
+            this.RemovePasswordButton.Location = new System.Drawing.Point(105, 415);
+            this.RemovePasswordButton.Name = "RemovePasswordButton";
+            this.RemovePasswordButton.Size = new System.Drawing.Size(75, 23);
+            this.RemovePasswordButton.TabIndex = 8;
+            this.RemovePasswordButton.Text = "Remove";
+            this.RemovePasswordButton.UseVisualStyleBackColor = true;
+            this.RemovePasswordButton.Click += new System.EventHandler(this.RemovePasswordButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(542, 450);
+            this.Controls.Add(this.RemovePasswordButton);
             this.Controls.Add(this.AddPasswordButton);
             this.Controls.Add(this.PasswordDataGridView);
             this.Controls.Add(this.LoadButton);
@@ -179,5 +192,6 @@ namespace PasswordManager.UI
         private DataGridViewTextBoxColumn Domain;
         private DataGridViewPasswordColumn Password;
         private Button AddPasswordButton;
+        private Button RemovePasswordButton;
     }
 }
