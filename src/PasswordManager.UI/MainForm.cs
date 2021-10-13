@@ -15,6 +15,7 @@ namespace PasswordManager.UI
     public partial class MainForm : Form
     {
         private readonly Action<string> _fileNameChanged;
+        private bool _isLoad = false;
 
         public MainForm()
         {
@@ -48,7 +49,36 @@ namespace PasswordManager.UI
 
         private void LoadButton_Click(object sender, EventArgs e)
         {
-            LoadFile();
+            if (_isLoad)
+            {
+                UnloadFile();
+            }
+            else
+            {
+                LoadFile();
+            }
+        }
+
+        private void MasterPasswordTextBox_KeyPress(object? sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (int)Keys.Enter)
+            {
+                if (_isLoad)
+                {
+                    UnloadFile();
+                }
+                else
+                {
+                    LoadFile();
+                }
+
+            }
+        }
+
+        private void UnloadFile()
+        {
+            PasswordDataGridView.DataSource = null;
+            SetLoad(false);
         }
 
         private void LoadFile()
@@ -68,20 +98,14 @@ namespace PasswordManager.UI
 
         private void SetLoad(bool isLoad)
         {
+            _isLoad = isLoad;
             FileSelectButton.Enabled = !isLoad;
-            LoadButton.Enabled = !isLoad;
             MasterPasswordTextBox.Enabled = !isLoad;
 
             AddPasswordButton.Enabled = isLoad;
             RemovePasswordButton.Enabled = isLoad;
-        }
 
-        private void MasterPasswordTextBox_KeyPress(object? sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (int)Keys.Enter)
-            {
-                LoadFile();
-            }
+            LoadButton.Text = isLoad ? "Unload" : "Load";
         }
 
         private void PasswordDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
