@@ -144,7 +144,7 @@ namespace PasswordManager.UI
             this.Controls.Add(this.FileTextBox);
             this.Controls.Add(this.FileLabel);
             this.Name = "MainForm";
-            this.Text = "MainForm";
+            this.Text = "Password Manager";
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PasswordDataGridView)).EndInit();
             this.ResumeLayout(false);
