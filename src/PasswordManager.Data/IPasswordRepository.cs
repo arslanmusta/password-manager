@@ -7,5 +7,7 @@ namespace PasswordManager.Data
         ICollection<Password> GetAll();
 
         void Add(Password password);
+
+        void Remove(string domain);
     }
 }

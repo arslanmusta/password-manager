@@ -49,6 +49,18 @@ namespace PasswordManager.Data
             Commit();
         }
 
+        public void Remove(string domain)
+        {
+            var existPassword = _passwords.FirstOrDefault(p => p.Domain == domain);
+
+            if (existPassword != null)
+            {
+                _passwords.Remove(existPassword);
+            }
+
+            Commit();
+        }
+
         private void Commit()
         {
             var json = JsonSerializer.Serialize(_passwords);
